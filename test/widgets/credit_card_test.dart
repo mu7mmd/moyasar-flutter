@@ -15,11 +15,15 @@ Widget createTestableApp(
   void onPaymentResult() {}
 
   return MaterialApp(
-      home: Scaffold(
-          body: CreditCard(
-              locale: locale,
-              config: paymentConfig,
-              onPaymentResult: onPaymentResult)));
+    home: Scaffold(
+      body: CreditCard(
+        locale: locale,
+        config: paymentConfig,
+        onPaymentResult: onPaymentResult,
+        primaryColor: Colors.blue,
+      ),
+    ),
+  );
 }
 
 void main() {
