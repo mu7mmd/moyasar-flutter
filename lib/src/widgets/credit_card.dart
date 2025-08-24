@@ -101,13 +101,20 @@ class _CreditCardState extends State<CreditCard> {
         manualPayment: _manualPayment);
     final paymentRequest = PaymentRequest(widget.config, source);
 
-    setState(() => _isSubmitting = true);
+    setState(() {
+      widget.onPaymentResult(true);
+      _isSubmitting = true;
+    });
 
     final result = await Moyasar.pay(
-        apiKey: widget.config.publishableApiKey,
-        paymentRequest: paymentRequest);
+      apiKey: widget.config.publishableApiKey,
+      paymentRequest: paymentRequest,
+    );
 
-    setState(() => _isSubmitting = false);
+    setState(() {
+      widget.onPaymentResult(false);
+      _isSubmitting = false;
+    });
 
     if (result is! PaymentResponse ||
         result.status != PaymentStatus.initiated) {
