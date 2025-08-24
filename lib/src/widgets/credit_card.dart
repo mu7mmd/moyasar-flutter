@@ -124,8 +124,8 @@ class _CreditCardState extends State<CreditCard> {
       return;
     }
 
-    final String transactionUrl =
-        (result.source as CardPaymentResponseSource).transactionUrl;
+    final transactionUrl =
+        (result.source as CardPaymentResponseSource).transactionUrl!;
 
     if (mounted) {
       Navigator.push(
