@@ -20,7 +20,7 @@ class CardPaymentResponseSource implements PaymentResponseSource {
   String? message;
 
   /// Used to complete the 3DS step.
-  String transactionUrl;
+  String? transactionUrl;
 
   CardPaymentResponseSource({
     required this.company,
