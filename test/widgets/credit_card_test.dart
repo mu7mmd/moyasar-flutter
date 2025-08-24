@@ -19,6 +19,7 @@ Widget createTestableApp(
       body: CreditCard(
         locale: locale,
         config: paymentConfig,
+        isPaymentLoading: (loading) {},
         onPaymentResult: onPaymentResult,
         primaryColor: Colors.blue,
       ),
