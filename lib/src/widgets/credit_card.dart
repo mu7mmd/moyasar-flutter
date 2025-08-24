@@ -261,6 +261,7 @@ class _CreditCardState extends State<CreditCard> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp('[a-zA-Z. ]')),
               ],
+              readOnly: _isSubmitting,
             ),
           ),
           SizedBox(
@@ -320,6 +321,7 @@ class _CreditCardState extends State<CreditCard> {
                   ],
                   onSaved: (value) =>
                       _cardData.number = CardUtils.getCleanedNumber(value!),
+                  readOnly: _isSubmitting,
                 ),
                 const Divider(height: 2),
                 Row(
@@ -352,6 +354,7 @@ class _CreditCardState extends State<CreditCard> {
                               _cardData.year =
                                   expireDate[1].replaceAll('\u200E', '');
                             },
+                            readOnly: _isSubmitting,
                           ),
                         ],
                       ),
@@ -383,6 +386,7 @@ class _CreditCardState extends State<CreditCard> {
                             ],
                             onChanged: _validateCVC,
                             onSaved: (value) => _cardData.cvc = value ?? '',
+                            readOnly: _isSubmitting,
                           ),
                         ],
                       ),
@@ -527,16 +531,19 @@ class CardFormField extends StatelessWidget {
   final TextInputAction textInputAction;
   final List<TextInputFormatter>? inputFormatters;
   final InputDecoration? inputDecoration;
+  final bool readOnly;
 
-  const CardFormField(
-      {super.key,
-      required this.onSaved,
-      this.validator,
-      this.onChanged,
-      this.inputDecoration,
-      this.keyboardType = TextInputType.number,
-      this.textInputAction = TextInputAction.next,
-      this.inputFormatters});
+  const CardFormField({
+    super.key,
+    required this.onSaved,
+    this.validator,
+    this.onChanged,
+    this.inputDecoration,
+    this.keyboardType = TextInputType.number,
+    this.textInputAction = TextInputAction.next,
+    this.inputFormatters,
+    required this.readOnly,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -551,6 +558,7 @@ class CardFormField extends StatelessWidget {
         onChanged: onChanged,
         inputFormatters: inputFormatters,
         textDirection: inputDecoration?.hintTextDirection,
+        readOnly: readOnly,
         textAlign: inputDecoration?.hintTextDirection == TextDirection.rtl
             ? TextAlign.right
             : TextAlign.left,
