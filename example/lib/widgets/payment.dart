@@ -27,6 +27,7 @@ class PaymentMethods extends StatelessWidget {
         CreditCard(
           config: paymentConfig,
           onPaymentResult: onPaymentResult,
+          primaryColor: Colors.blue,
         ),
 
         //pay with STC Demo Button
