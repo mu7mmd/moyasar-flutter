@@ -26,6 +26,7 @@ class PaymentMethods extends StatelessWidget {
           const SizedBox.shrink(),
         CreditCard(
           config: paymentConfig,
+          isPaymentLoading: (loading) {},
           onPaymentResult: onPaymentResult,
           primaryColor: Colors.blue,
         ),
