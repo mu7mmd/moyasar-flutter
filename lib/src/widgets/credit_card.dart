@@ -12,12 +12,14 @@ class CreditCard extends StatefulWidget {
   CreditCard({
     super.key,
     required this.config,
+    required this.isPaymentLoading,
     required this.onPaymentResult,
     required this.primaryColor,
     this.locale = const Localization.en(),
   }) : textDirection =
             locale.languageCode == 'ar' ? TextDirection.rtl : TextDirection.ltr;
 
+  final ValueChanged<bool> isPaymentLoading;
   final Function onPaymentResult;
   final PaymentConfig config;
   final Localization locale;
@@ -102,7 +104,7 @@ class _CreditCardState extends State<CreditCard> {
     final paymentRequest = PaymentRequest(widget.config, source);
 
     setState(() {
-      widget.onPaymentResult(true);
+      widget.isPaymentLoading(true);
       _isSubmitting = true;
     });
 
@@ -112,7 +114,7 @@ class _CreditCardState extends State<CreditCard> {
     );
 
     setState(() {
-      widget.onPaymentResult(false);
+      widget.isPaymentLoading(false);
       _isSubmitting = false;
     });
 
