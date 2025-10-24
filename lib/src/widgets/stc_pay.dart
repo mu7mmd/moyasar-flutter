@@ -266,7 +266,7 @@ class _STCPaymentFormState extends State<STCPaymentComponent> {
                 fontWeight: FontWeight.bold,
                 color: _controller.text.isNotEmpty && !_isValid
                     ? Colors.red // error color
-                    : Colors.black, // normal color
+                    : null, // theme color
               ),
               textDirection: widget.textDirection,
             ),
