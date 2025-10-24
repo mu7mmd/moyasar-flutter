@@ -57,6 +57,8 @@ class _CreditCardState extends State<CreditCard> {
   bool _expiryFieldFilled = false;
   bool _cvcFieldFilled = false;
 
+  late final _primaryColor = widget.primaryColor;
+
   @override
   void initState() {
     super.initState();
@@ -232,7 +234,7 @@ class _CreditCardState extends State<CreditCard> {
                   : TextAlign.left,
               style: TextStyle(
                 fontSize: 16,
-                color: _nameError != null ? Colors.red : Colors.black,
+                color: _nameError != null ? Colors.red : null,
               )),
           SizedBox(
             height: 8,
@@ -262,6 +264,7 @@ class _CreditCardState extends State<CreditCard> {
                 FilteringTextInputFormatter.allow(RegExp('[a-zA-Z. ]')),
               ],
               readOnly: _isSubmitting,
+              primaryColor: _primaryColor,
             ),
           ),
           SizedBox(
@@ -281,7 +284,7 @@ class _CreditCardState extends State<CreditCard> {
                         _expiryError != null ||
                         _cvcError != null)
                     ? Colors.red
-                    : Colors.black,
+                    : null,
               )),
           SizedBox(
             height: 8,
@@ -322,6 +325,7 @@ class _CreditCardState extends State<CreditCard> {
                   onSaved: (value) =>
                       _cardData.number = CardUtils.getCleanedNumber(value!),
                   readOnly: _isSubmitting,
+                  primaryColor: _primaryColor,
                 ),
                 const Divider(height: 2),
                 Row(
@@ -355,6 +359,7 @@ class _CreditCardState extends State<CreditCard> {
                                   expireDate[1].replaceAll('\u200E', '');
                             },
                             readOnly: _isSubmitting,
+                            primaryColor: _primaryColor,
                           ),
                         ],
                       ),
@@ -387,6 +392,7 @@ class _CreditCardState extends State<CreditCard> {
                             onChanged: _validateCVC,
                             onSaved: (value) => _cardData.cvc = value ?? '',
                             readOnly: _isSubmitting,
+                            primaryColor: _primaryColor,
                           ),
                         ],
                       ),
@@ -408,8 +414,8 @@ class _CreditCardState extends State<CreditCard> {
                       const WidgetStatePropertyAll<Size>(Size.fromHeight(52)),
                   backgroundColor: WidgetStatePropertyAll<Color>(
                     _isButtonEnabled
-                        ? widget.primaryColor
-                        : widget.primaryColor.withValues(alpha: .3),
+                        ? _primaryColor
+                        : _primaryColor.withValues(alpha: .3),
                   ),
                   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -467,7 +473,7 @@ class _CreditCardState extends State<CreditCard> {
             tokenizeCard: _tokenizeCard,
             locale: widget.locale,
             textDirection: widget.textDirection,
-            primaryColor: widget.primaryColor,
+            primaryColor: _primaryColor,
           ),
         ],
       ),
@@ -532,6 +538,7 @@ class CardFormField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final InputDecoration? inputDecoration;
   final bool readOnly;
+  final Color primaryColor;
 
   const CardFormField({
     super.key,
@@ -543,6 +550,7 @@ class CardFormField extends StatelessWidget {
     this.textInputAction = TextInputAction.next,
     this.inputFormatters,
     required this.readOnly,
+    required this.primaryColor,
   });
 
   @override
@@ -559,6 +567,9 @@ class CardFormField extends StatelessWidget {
         inputFormatters: inputFormatters,
         textDirection: inputDecoration?.hintTextDirection,
         readOnly: readOnly,
+        style: TextStyle(color: Colors.black),
+        cursorColor: primaryColor,
+        cursorHeight: 14,
         textAlign: inputDecoration?.hintTextDirection == TextDirection.rtl
             ? TextAlign.right
             : TextAlign.left,
