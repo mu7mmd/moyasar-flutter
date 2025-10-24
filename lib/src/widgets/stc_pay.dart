@@ -310,7 +310,7 @@ class _STCPaymentFormState extends State<STCPaymentComponent> {
                 //     ? widget.locale.invalidPhoneNumber
                 //     : null,
               ),
-              style: const TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20, color: Colors.black),
               onChanged: (_) {
                 // ensure label updates when user types
                 setState(() {});

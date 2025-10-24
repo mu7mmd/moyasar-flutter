@@ -90,7 +90,7 @@ class _OtpComponentState extends State<OtpComponent> {
                 fontWeight: FontWeight.bold,
                 color: _otpController.text.isNotEmpty && !_isFormValid
                     ? Colors.red
-                    : Colors.black,
+                    : null,
               ),
               textDirection: widget.textDirection,
             ),
@@ -101,9 +101,7 @@ class _OtpComponentState extends State<OtpComponent> {
               maxLength: 10, // allow 4–10 digits
               textAlign: TextAlign.start,
               style: const TextStyle(
-                fontSize: 20,
-                letterSpacing: 10,
-              ),
+                  fontSize: 20, letterSpacing: 10, color: Colors.black),
               buildCounter: (context,
                       {required currentLength,
                       required isFocused,
